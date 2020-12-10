@@ -110,7 +110,7 @@ export default {
             return;
           }
           _this.$message.success("更新成功");
-          _this.dialogRegisterVisible = false;
+          _this.dialogUpdateUserVisible = false;
           if (_this.ruleForm.userLevel === 0) {
             sessionStorage.setItem("activeName", "UserManage");
           } else {

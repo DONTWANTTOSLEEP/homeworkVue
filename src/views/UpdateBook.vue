@@ -1,6 +1,17 @@
 <template>
-  <el-dialog title="AddBook" :visible.sync="dialogAddBookVisible" width="30%">
+  <el-dialog
+    title="UpdateBook"
+    :visible.sync="dialogUpdateBookVisible"
+    width="30%"
+  >
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
+      <el-form-item
+        label="pkBookId"
+        :label-width="formLabelWidth"
+        prop="pkBookId"
+      >
+        <el-input v-model="ruleForm.pkBookId" disabled></el-input>
+      </el-form-item>
       <el-form-item
         label="pkBookName"
         :label-width="formLabelWidth"
@@ -17,20 +28,23 @@
     </el-form>
 
     <div slot="footer" class="dialog-footer">
-      <el-button @click="dialogAddUserVisible = false">Cancel</el-button>
-      <el-button type="primary" @click="submitForm('ruleForm')">Add</el-button>
+      <el-button @click="dialogUpdateUserVisible = false">Cancel</el-button>
+      <el-button type="primary" @click="submitForm('ruleForm')"
+        >Update</el-button
+      >
     </div>
   </el-dialog>
 </template>
 
 <script>
 export default {
-  name: "AddBook",
+  name: "UpdateBook",
   data() {
     return {
-      dialogAddBookVisible: false,
+      dialogUpdateBookVisible: false,
       formLabelWidth: "150px",
       ruleForm: {
+        pkBookId: "",
         pkBookName: "",
         author: "",
         amount: ""
@@ -39,40 +53,45 @@ export default {
         pkBookName: [
           { required: true, message: "请输入书名", trigger: "blur" }
         ],
-        author: [{ required: true, message: "请输入作者", trigger: "blur" }],
+        author: [{ required: true, message: "请输入作者名", trigger: "blur" }],
         amount: [{ required: true, message: "请输入库存", trigger: "blur" }]
       }
     };
   },
   methods: {
-    open() {
-      this.dialogAddBookVisible = true;
+    open(info) {
+      console.log(info);
+      this.ruleForm.pkBookId = info.pkBookId;
+      this.ruleForm.pkBookName = info.pkBookName;
+      this.ruleForm.author = info.author;
+      this.ruleForm.amount = info.amount;
+      this.dialogUpdateBookVisible = true;
     },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.Add();
+          this.Update();
         } else {
           console.log("error submit!!");
           return false;
         }
       });
     },
-    Add() {
+    Update() {
       console.log(this.ruleForm);
       const _this = this;
       this.$axios
-        .post("http://localhost:8081/library/book/addBook", this.ruleForm)
+        .put("http://localhost:8081/library/book/updateBook", this.ruleForm)
         .then(function(result) {
           console.log(result.data);
           if (result.data.code === 200) {
-            _this.$message.error(result.data.info.addBookInfo);
+            _this.$message.error(result.data.info.updateBookInfo);
             return;
           }
-          _this.$message.success(result.data.info.addBookInfo);
-          _this.dialogAddBookVisible = false;
-          _this.$router.go(0);
+          _this.$message.success("更新成功");
+          _this.dialogUpdateBookVisible = false;
           sessionStorage.setItem("activeName", "BookManage");
+          _this.$router.go(0);
         });
     }
   }

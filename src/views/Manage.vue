@@ -1,14 +1,5 @@
 <template>
   <el-tabs tab-position="left" v-model="activeName" @tab-click="handleTabClick">
-    <!-- 用户名，退出 -->
-    <el-dropdown id="user" @command="handleCommand" :show-timeout="100">
-      <span class="el-dropdown-link"
-        >{{ userName }}<i class="el-icon-arrow-down el-icon--right"></i
-      ></span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item command="logout">Logout</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
     <!-- 管理员CRUD -->
     <el-tab-pane label="管理员管理" v-if="isSystem" name="AdminManage">
       <el-card class="box-card">
@@ -41,13 +32,33 @@
           </el-row>
         </div>
         <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="pkId" label="pkId"></el-table-column>
-          <el-table-column prop="pkName" label="pkName"></el-table-column>
-          <el-table-column prop="password" label="password"></el-table-column>
-          <el-table-column prop="userLevel" label="userLevel"></el-table-column>
-          <el-table-column prop="handle" label="handle">
+          <el-table-column
+            prop="pkId"
+            label="pkId"
+            align="center"
+            width="100"
+          ></el-table-column>
+          <el-table-column
+            prop="pkName"
+            label="pkName"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            prop="password"
+            label="password"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            prop="userLevel"
+            label="userLevel"
+            align="center"
+          ></el-table-column>
+          <el-table-column prop="handle" label="handle" align="center">
             <template slot-scope="scope">
-              <el-button size="mini" @click="updateUserOpen(scope.row)"
+              <el-button
+                size="mini"
+                @click="updateUserOpen(scope.row)"
+                type="primary"
                 >编辑</el-button
               >
               <el-button
@@ -103,13 +114,33 @@
           </el-row>
         </div>
         <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="pkId" label="pkId"></el-table-column>
-          <el-table-column prop="pkName" label="pkName"></el-table-column>
-          <el-table-column prop="password" label="password"></el-table-column>
-          <el-table-column prop="userLevel" label="userLevel"></el-table-column>
-          <el-table-column prop="handle" label="handle">
+          <el-table-column
+            prop="pkId"
+            label="pkId"
+            align="center"
+            width="100"
+          ></el-table-column>
+          <el-table-column
+            prop="pkName"
+            label="pkName"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            prop="password"
+            label="password"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            prop="userLevel"
+            label="userLevel"
+            align="center"
+          ></el-table-column>
+          <el-table-column prop="handle" label="handle" align="center">
             <template slot-scope="scope">
-              <el-button size="mini" @click="updateUserOpen(scope.row)"
+              <el-button
+                size="mini"
+                @click="updateUserOpen(scope.row)"
+                type="primary"
                 >编辑</el-button
               >
               <el-button
@@ -167,13 +198,33 @@
           </el-row>
         </div>
         <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="pkBookId" label="BookId"></el-table-column>
-          <el-table-column prop="pkBookName" label="BookName"></el-table-column>
-          <el-table-column prop="author" label="Author"></el-table-column>
-          <el-table-column prop="amount" label="Amount"></el-table-column>
-          <el-table-column prop="handle" label="handle">
+          <el-table-column
+            prop="pkBookId"
+            label="BookId"
+            align="center"
+            width="100"
+          ></el-table-column>
+          <el-table-column
+            prop="pkBookName"
+            label="BookName"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            prop="author"
+            label="Author"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            prop="amount"
+            label="Amount"
+            align="center"
+          ></el-table-column>
+          <el-table-column prop="handle" label="handle" align="center">
             <template slot-scope="scope">
-              <el-button size="mini" @click="updateBookOpen(scope.row)"
+              <el-button
+                size="mini"
+                @click="updateBookOpen(scope.row)"
+                type="primary"
                 >编辑</el-button
               >
               <el-button
@@ -198,31 +249,67 @@
       </el-card>
     </el-tab-pane>
     <AddBook ref="addBookDialog"></AddBook>
+    <UpdateBook ref="updateBookDialog"></UpdateBook>
     <!-- 借还操作 -->
     <el-tab-pane label="借还管理" name="BorrowAndReturn">
       <el-card class="box-card">
         <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="pkBookId" label="BookId"></el-table-column>
-          <el-table-column prop="pkUserName" label="UserName"></el-table-column>
-          <el-table-column prop="pkBookName" label="BookName"></el-table-column>
-          <el-table-column prop="author" label="Author"></el-table-column>
+          <el-table-column
+            prop="pkBookId"
+            label="BookId"
+            align="center"
+            width="100"
+          ></el-table-column>
+          <el-table-column
+            prop="pkUserName"
+            label="UserName"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            prop="pkBookName"
+            label="BookName"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            prop="author"
+            label="Author"
+            align="center"
+          ></el-table-column>
           <el-table-column
             prop="borrowTime"
             label="borrowTime"
+            align="center"
           ></el-table-column>
-          <el-table-column
-            prop="returnTime"
-            label="returnTime"
-          ></el-table-column>
-          <el-table-column
-            prop="borrowState"
-            label="borrowState"
-          ></el-table-column>
-          <el-table-column prop="handle" label="handle">
-            <!--            <template slot-scope="scope">-->
-            <template>
+          <el-table-column label="borrowState" align="center">
+            <template slot-scope="scope">
+              <!-- <el-button @click="test(scope)"></el-button> -->
+              <el-tag
+                effect="dark"
+                type="success"
+                v-if="scope.row.borrowState === 0"
+                >申请借阅
+              </el-tag>
+              <el-tag
+                effect="dark"
+                type="warning"
+                v-if="scope.row.borrowState === 2"
+                >申请归还
+              </el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="handle" label="handle" align="center">
+            <template slot-scope="scope">
               <!--              @click="function(scope.row)"-->
-              <el-button size="mini">同意</el-button>
+              <el-button size="mini" type="primary" @click="agree(scope.row)"
+                >同意</el-button
+              >
+              <el-button
+                size="mini"
+                :disabled="scope.row.borrowState === 2"
+                type="danger"
+                @click="refuse(scope.row)"
+                >拒绝</el-button
+              >
             </template>
           </el-table-column>
         </el-table>
@@ -245,12 +332,12 @@
 import UpdateUser from "@/views/UpdateUser";
 import AddUser from "@/views/AddUser";
 import AddBook from "@/views/AddBook";
+import UpdateBook from "@/views/UpdateBook";
 export default {
   name: "Manage",
-  components: { AddBook, AddUser, UpdateUser },
+  components: { UpdateBook, AddBook, AddUser, UpdateUser },
   data() {
     return {
-      userName: sessionStorage.getItem("userName"),
       isSystem: sessionStorage.getItem("isSystem"),
       isAdmin: sessionStorage.getItem("isAdmin"),
       tableData: [],
@@ -264,18 +351,6 @@ export default {
     };
   },
   methods: {
-    handleCommand(command) {
-      if (command === "logout") {
-        sessionStorage.setItem("userName", "");
-        sessionStorage.setItem("isSystem", "");
-        sessionStorage.setItem("isAdmin", "");
-        sessionStorage.setItem("isUser", "");
-        this.userName = "";
-        this.isAdmin = "";
-        this.isSystem = "";
-        this.$router.push("/");
-      }
-    },
     handleTabClick(tab, event) {
       console.log(tab, event);
       if (tab.name === "AdminManage") {
@@ -299,7 +374,6 @@ export default {
         this.getBookList(1, 10, "");
       }
       if (tab.name === "BorrowAndReturn") {
-        this.searchText = "";
         this.currentPage = 1;
         sessionStorage.setItem("activeName", "BorrowAndReturn");
         this.getBorrowList(1, 10);
@@ -353,6 +427,10 @@ export default {
       this.currentPage = val;
       this.getBookList(val, 10, "");
     },
+    handleCurrentChangeForBorrow(val) {
+      this.currentPage = val;
+      this.getBorrowList(val, 10, 2);
+    },
     getUserList(userLevel, page, sum, searchText) {
       const _this = this;
       this.$axios
@@ -391,7 +469,7 @@ export default {
       const _this = this;
       this.$axios
         .get(
-          "http://localhost:8081/library/record/getRecordList/" +
+          "http://localhost:8081/library/record/getRecordByAdmin/" +
             page +
             "/" +
             sum
@@ -399,6 +477,7 @@ export default {
         .then(function(result) {
           console.log(result);
           _this.tableData = result.data.info.recordsInfo.records;
+          _this.totalRecords = result.data.info.recordsInfo.total;
         });
     },
     deleteUser(id) {
@@ -443,11 +522,44 @@ export default {
     updateUserOpen(info) {
       this.$refs.updateUserDialog.open(info);
     },
+    updateBookOpen(info) {
+      this.$refs.updateBookDialog.open(info);
+    },
     addUserOpen() {
       this.$refs.addUserDialog.open();
     },
     addBookOpen() {
       this.$refs.addBookDialog.open();
+    },
+    agree(info) {
+      // console.log(info);
+      const _this = this;
+      this.$axios
+        .put("http://localhost:8081/library/record/updateRecord", info)
+        .then(function(result) {
+          console.log(result);
+          if (result.data.code === 100) {
+            _this.$router.go(0);
+            _this.$message.success(result.data.info.agreeInfo);
+          } else {
+            _this.$message.error(result.data.info.agreeInfo);
+          }
+        });
+    },
+    refuse(info) {
+      // console.log(info);
+      const _this = this;
+      this.$axios
+        .put("http://localhost:8081/library/record/refuse", info)
+        .then(function(result) {
+          console.log(result);
+          if (result.data.code === 100) {
+            _this.$router.go(0);
+            _this.$message.success(result.data.info.refuseInfo);
+          } else {
+            _this.$message.error(result.data.info.refuseInfo);
+          }
+        });
     }
   },
   created() {
@@ -462,15 +574,15 @@ export default {
     if (sessionStorage.getItem("activeName") === "BookManage") {
       this.getBookList(1, 10, "");
     }
+    if (sessionStorage.getItem("activeName") === "BorrowAndReturn") {
+      this.getBorrowList(1, 10);
+    }
   }
 };
 </script>
 
 <style scoped>
-#user {
-  float: right;
-  text-align: center;
-}
+#pageNav,
 #pageNav0,
 #pageNavBook,
 #pageNavBorrow {

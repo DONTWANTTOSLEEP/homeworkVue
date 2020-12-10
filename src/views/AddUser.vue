@@ -99,7 +99,7 @@ export default {
             return;
           }
           _this.$message.success(result.data.info.registerInfo);
-          _this.dialogRegisterVisible = false;
+          _this.dialogAddUserVisible = false;
           if (_this.ruleForm.userLevel === 0) {
             sessionStorage.setItem("activeName", "UserManage");
           } else {
