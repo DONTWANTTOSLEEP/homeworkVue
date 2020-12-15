@@ -115,7 +115,11 @@ export default {
         this.$router.go(0);
       }
       if (command === "manage") {
-        sessionStorage.setItem("activeName", "AdminManage");
+        if (this.isSystem) {
+          sessionStorage.setItem("activeName", "AdminManage");
+        } else {
+          sessionStorage.setItem("activeName", "UserManage");
+        }
         this.$router.push({
           name: "Manage"
         });
